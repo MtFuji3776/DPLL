@@ -1,0 +1,6 @@
+documentclass: `
+
+maketitle:
+  title: test
+  author:
+  date:
