@@ -127,7 +127,7 @@ flagCheck cnf
 -- splitにもsimplify_を使う。その第一引数のために、CNF値に含まれるIntの最小値として取得する。
 getMinimumVar :: CNF -> Maybe Var
 getMinimumVar cnf =
-    let findMin' Top = Nothing -- Topは絶対に選ばれないようIntの最大値扱い
+    let findMin' Top = Nothing -- Topは除外
         findMin' (Clause s) =  S.lookupMin s -- 最小値が存在すれば Just n の形で返す。存在しなければNothingを返す
         mins = S.filter (Nothing /=) . S.map findMin' $ cnf  -- 個々の節の最小値でJust nの形をしたものだけを導出
     in join $ S.lookupMin mins --各Clauseの最小値の中から一番小さい値を導出。存在しなければ(minsが空集合ならば)Nothingを返す。
