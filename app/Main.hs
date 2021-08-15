@@ -89,12 +89,10 @@ getSingletons cnf = S.unions . S.map toSet $ S.filter isSingleton cnf -- 単項C
 
 
 -- CNF値に対し簡約操作を実行する関数の中身。
--- DIMACSでは0が変数に使われないことを利用し、0一点の集合はTopと同一視する。
-    -- Semantics的にはBadだが今はこれで良い。
 simplify_ :: Var -> Clause -> Clause
 simplify_ v Top    = Top
 simplify_ v (Clause s) 
-    | S.member v s = Top
+    | S.member v s = Top 
     | S.member (-v) s = Clause $ S.delete (-v) s
     | otherwise = Clause s
 
